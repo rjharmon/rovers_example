@@ -1,2 +1,5 @@
 #!/usr/bin/env ruby -w
 
+$-I << File.expand_path(File.dirname(__FILE__) + "/../lib")
+
+require 'parser'
