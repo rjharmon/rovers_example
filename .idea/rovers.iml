@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="RUBY_MODULE" version="4">
+  <component name="GemRequirementsHolder" version="3">
+    <requirement>
+      <requirement>
+        <dependency name="aruba" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
+      </requirement>
+      <source from="Gemfile" />
+    </requirement>
+    <requirement>
+      <requirement>
+        <dependency name="cucumber" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
+      </requirement>
+      <source from="Gemfile" />
+    </requirement>
+    <requirement>
+      <requirement>
+        <dependency name="rspec" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
+      </requirement>
+      <source from="Gemfile" />
+    </requirement>
+  </component>
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.bundle" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rspec (v2.4.0, /Users/rharmon/.rvm/gems/ruby-1.8.7-p302@global/gems/rspec-2.4.0)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] cucumber (v0.10.0, /Users/rharmon/.rvm/gems/ruby-1.8.7-p302@global/gems/cucumber-0.10.0)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rspec-core (v2.4.0, /Users/rharmon/.rvm/gems/ruby-1.8.7-p302@global/gems/rspec-core-2.4.0)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rspec-expectations (v2.4.0, /Users/rharmon/.rvm/gems/ruby-1.8.7-p302@global/gems/rspec-expectations-2.4.0)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] gherkin (v2.3.3, /Users/rharmon/.rvm/gems/ruby-1.8.7-p302@global/gems/gherkin-2.3.3)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] diff-lcs (v1.1.2, /Users/rharmon/.rvm/gems/ruby-1.8.7-p302@global/gems/diff-lcs-1.1.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] rspec-mocks (v2.4.0, /Users/rharmon/.rvm/gems/ruby-1.8.7-p302@global/gems/rspec-mocks-2.4.0)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] json (v1.4.6, /Users/rharmon/.rvm/gems/ruby-1.8.7-p302@global/gems/json-1.4.6)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] builder (v3.0.0, /Users/rharmon/.rvm/gems/ruby-1.8.7-p302@global/gems/builder-3.0.0)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] term-ansicolor (v1.0.5, /Users/rharmon/.rvm/gems/ruby-1.8.7-p302@global/gems/term-ansicolor-1.0.5)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] bundler (v1.0.0.rc.5, /Users/rharmon/.rvm/gems/ruby-1.8.7-p302@global/gems/bundler-1.0.0.rc.5)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] aruba (v0.2.7, /Users/rharmon/.rvm/gems/ruby-1.8.7-p302@rovers/gems/aruba-0.2.7)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] background_process (v1.2, /Users/rharmon/.rvm/gems/ruby-1.8.7-p302@rovers/gems/background_process-1.2)" level="application" />
+  </component>
+</module>
+
