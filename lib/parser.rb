@@ -7,8 +7,16 @@ class Parser
         if input =~ /(\d+)\s+(\d+)/
           @height, @width = $1.to_i, $2.to_i
           @plateau = Plateau.new(@height, @width)
+          @state = "waiting for rover"
         else
-          # TODO: error handling
+          # TODO: error reporting
+        end
+      when /rover/
+        if input =~ /(\d+)\s+(\d+)\s+([NSEW])/
+          x, y, direction = $1.to_i, $2.to_i, $3
+          @current_rover = Rover.new(x, y, direction)
+        else
+          # TODO error reporting
         end
     end
   end
