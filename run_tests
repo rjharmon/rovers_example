@@ -1,0 +1,1 @@
+rspec --require spec/spec_helper spec $*
