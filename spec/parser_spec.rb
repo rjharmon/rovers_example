@@ -62,6 +62,9 @@ describe "parsing input" do
       @p.read("3 2 E")
       @p.state.should =~ /commands/
     end
+    it "returns the rover so its info can be extracted by the command-line tool" do
+      @p.read("3 2 E").should be_instance_of(Rover)
+    end
     describe "acceptable formatting discrepancies:" do
       {
         "  3 2 E" => "leading spaces",
@@ -89,8 +92,11 @@ describe "parsing input" do
       @rover.should_receive(:move)
       @p.read("MLM")
     end
+    it "barfs on bad commands" do
+      lambda { @p.read("3 2 E") }.should raise_error(Parser::BadCommand)
+    end
     it "goes into waiting-for-rover state" do
-      @p.read("3 2 E")
+      @p.read("MLM")
       @p.state.should =~ /rover/
     end
     it "reports the location of the problem if the rover is lost" do

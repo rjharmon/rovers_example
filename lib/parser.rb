@@ -1,6 +1,6 @@
 class Parser
   class BadInputError < Exception ; end
-  attr_accessor :pleateau
+  class BadCommand < Exception ; end
 
   def read(input)
     @line ||= 0
@@ -38,6 +38,8 @@ class Parser
             when 'L', 'R'
               direction = command
               @current_rover.turn(direction)
+            else
+              raise BadCommand, "bad command '#{command}' at #{location}.  Rover can go L, R, or M."
           end
         end
         @state = 'waiting for rover'
