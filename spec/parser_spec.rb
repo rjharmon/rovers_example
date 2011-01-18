@@ -77,5 +77,22 @@ describe "parsing input" do
       end
     end
   end
-  
+
+  describe "moving the current rover" do
+    before do
+      @plateau = @p.read("6 5")
+      @rover = @p.read("3 2 E")
+    end
+    it "tells the rover to move and turn as requested" do
+      @rover.should_receive(:move)
+      @rover.should_receive(:turn).with("L")
+      @rover.should_receive(:move)
+      @p.read("MLM")
+    end
+    it "goes into waiting-for-rover state" do
+      @p.read("3 2 E")
+      @p.state.should =~ /rover/
+    end
+  end
+
 end

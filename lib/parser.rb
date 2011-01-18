@@ -17,14 +17,23 @@ class Parser
       when /rover/
         if input =~ /^\s*(\d+)\s+(\d+)\s+([NSEW])\s*$/i
           x, y, direction = $1.to_i, $2.to_i, $3
-          @state = "rover waiting for commands"
+          @state = "waiting for commands"
 
           @current_rover = Rover.new(@plateau, x, y, direction)
         else
           raise BadInputError, "bad formatting on line #{@line}.  Required: X Y D (location and direction [NSEW] of rover)"
         end
       when /waiting for commands/
-
+        input.each_char do |command|
+          case command
+            when 'M'
+              @current_rover.move
+            when 'L', 'R'
+              direction = command
+              @current_rover.turn(direction)
+          end
+        end
+        @state = 'waiting for rover'
     end
   end
 
