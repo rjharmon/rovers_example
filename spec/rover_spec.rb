@@ -1,10 +1,17 @@
 require "rspec"
 
-describe Initialization do
+describe "initialization" do
+  before do
+    @r = Rover.new(10,1,"E")
+  end
+  it "has the right position" do
+    pos = @r.position
 
-  it "should be initialized with position and direction" do
-
-    #To change this template use File | Settings | File Templates.
-    true.should == false
+    pos.first.should == 10
+    pos.last.should == 1
+  end
+  it "has the right direction" do
+    @r.direction.should == "E"
   end
 end
+

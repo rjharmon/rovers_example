@@ -44,5 +44,29 @@ describe "parsing input" do
       end
     end
   end
+
+  describe "placing a rover" do
+    before do
+      @plateau = @p.read("6 5")
+    end
+    it "creates a rover in the right initial position" do
+      Rover.should_receive(:new).with(@plateau, 3, 2, "E")
+      @p.read("3 2 E")
+    end
+    describe "acceptable formatting discrepancies:" do
+      {
+        "  3 2 E" => "leading spaces",
+        "3 2 E  " => "trailing spaces",
+        "3  2  E" => "internal spaces",
+        "3 2 e" => "lower-case"
+      }.each do |example, description|
+        it(description) do
+          lambda {
+            @p.read(example)
+          }.should_not raise_error(/line 2/)
+        end
+      end
+    end
+  end
   
 end
