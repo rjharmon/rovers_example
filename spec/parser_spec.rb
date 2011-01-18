@@ -13,6 +13,11 @@ describe "parsing input" do
       @p.read("6 5")
     end
 
+    it "goes into waiting-for-rover state" do
+      @p.read("6 5")
+      @p.state.should =~ /rover/
+    end
+
     describe "- acceptable formatting discrepancies:" do
       {
         "  1 2" => "leading spaces",
@@ -53,6 +58,10 @@ describe "parsing input" do
       Rover.should_receive(:new).with(@plateau, 3, 2, "E")
       @p.read("3 2 E")
     end
+    it "goes into waiting-for-rover-commands state" do
+      @p.read("3 2 E")
+      @p.state.should =~ /commands/
+    end
     describe "acceptable formatting discrepancies:" do
       {
         "  3 2 E" => "leading spaces",
@@ -63,7 +72,7 @@ describe "parsing input" do
         it(description) do
           lambda {
             @p.read(example)
-          }.should_not raise_error(/line 2/)
+          }.should_not raise_error
         end
       end
     end

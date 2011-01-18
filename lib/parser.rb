@@ -28,7 +28,6 @@ class Parser
     end
   end
 
-protected
   def state
     @state ||= "waiting for plateau size"
   end
