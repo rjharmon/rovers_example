@@ -32,7 +32,10 @@ class Rover
     @heading = heading
   end
 
-
+  def to_s
+    [ @position, @heading ].flatten.join(" ")
+  end
+  
   def move
     direction = OFFSETS[heading]
     new_x = guard_move(@position.first, direction.first, @plateau.width)

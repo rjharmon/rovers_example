@@ -17,7 +17,9 @@ Feature: controlling the rover
       """
       1 3 N
       5 1 E
+
       """
+      # trailing newline
 
   
 

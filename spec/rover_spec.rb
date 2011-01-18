@@ -131,6 +131,12 @@ describe Rover do
       end
     end
   end
+
+  describe "reporting on location/direction" do
+    it "with to_s" do
+      @r.to_s.should == "5 5 E"
+    end
+  end
 end
 
 
