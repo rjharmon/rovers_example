@@ -16,8 +16,8 @@ describe Rover do
       pos = @r.position
       pos.should == [5, 5]
     end
-    it "has the right direction" do
-      @r.direction.should == E
+    it "has the right heading" do
+      @r.heading.should == E
     end
   end
 
@@ -26,13 +26,13 @@ describe Rover do
       @r.move
       @r.position.should == [6, 5]
     end
-    it "doesn't change direction" do
+    it "doesn't change heading" do
       @r.move
-      @r.direction.should == E
+      @r.heading.should == E
     end
-    describe "different directions" do
-      def go(direction)
-        @r.direction = direction
+    describe "on different heading" do
+      def go(heading)
+        @r.heading = heading
         @r.move
       end
       it "should go north" do
@@ -55,13 +55,13 @@ describe Rover do
   end
 
   describe "turn" do
-    def should_turn(turn, directions = {})
-      from_dir = directions.keys.first || raise( ArgumentError, "one key-value for direction")
-      to_dir = directions[from_dir]
+    def should_turn(turn, headings = {})
+      from_hd = headings.keys.first || raise( ArgumentError, "one key-value for direction")
+      to_hd = headings[from_hd]
 
-      @r.direction = from_dir
+      @r.heading = from_hd
       @r.turn(turn)
-      @r.direction.should == to_dir
+      @r.heading.should == to_hd
     end
     describe "error" do
       it "raises exception for bad directions" do

@@ -2,7 +2,7 @@ class Rover
   class BadDirection < Exception ; end
 
   attr_accessor :position
-  attr_accessor :direction
+  attr_accessor :heading
 
   L = "L"
   R = "R"
@@ -18,33 +18,42 @@ class Rover
     W => [-1,0]
   }
 
-  DIRECTIONS = [ N, E, S, W ]
+  HEADINGS = [ N, E, S, W ]
   RIGHT = 1  # -> thataway
   LEFT = -1  # <- thataway
   TURNS = {
     L => LEFT,
     R => RIGHT
   }
-  def initialize(plateau, x,y,direction)
+  def initialize(plateau, x,y,heading)
     @position = [ x, y ]
     @plateau = plateau
-    @direction = direction
+    @heading = heading
   end
 
   def move
-    @position[0] += OFFSETS[direction].first
-    @position[1] += OFFSETS[direction].last
+    @position[0] += OFFSETS[heading].first
+    @position[1] += OFFSETS[heading].last
   end
 
   def turn(direction)
-    direction_index = DIRECTIONS.index(self.direction)
-    direction_index += TURNS[direction] || raise(BadDirection, "Can't turn #{direction} from #{self.direction}")
-    direction_index = 3 if direction_index < 0
-    direction_index = 0 if direction_index > 3
-
-    new_direction = DIRECTIONS[direction_index]
-    self.direction = new_direction
+    self.heading = new_heading(direction)
   end
+
+
+
+
+  def new_heading(direction)
+    current_index = HEADINGS.index(self.heading)
+    turn_direction = TURNS[direction] || raise(BadDirection, "Can't turn #{direction} from #{self.heading}")
+    
+    new_index = current_index + turn_direction
+    new_index = 3 if new_index < 0
+    new_index = 0 if new_index > 3
+
+    HEADINGS[new_index]
+  end
+  protected :new_heading
 
 end
 
