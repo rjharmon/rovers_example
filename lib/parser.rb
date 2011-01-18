@@ -1,23 +1,30 @@
 class Parser
-  attr_accessor :height, :width
+  class BadInputError < Exception ; end
+  attr_accessor :pleateau
 
   def read(input)
+    @line ||= 0
+    @line += 1
     case state
       when /plateau/
-        if input =~ /(\d+)\s+(\d+)/
+        if input =~ /^\s*(\d+)\s+(\d+)\s*$/
           @height, @width = $1.to_i, $2.to_i
-          @plateau = Plateau.new(@height, @width)
           @state = "waiting for rover"
+          @plateau = Plateau.new(@height, @width)
         else
-          # TODO: error reporting
+          raise BadInputError, "bad formatting on line #{@line}.  Required: X Y (integer sizes of plateau)"
         end
       when /rover/
-        if input =~ /(\d+)\s+(\d+)\s+([NSEW])/
+        if input =~ /^\s*(\d+)\s+(\d+)\s+([NSEW])\s*$/i
           x, y, direction = $1.to_i, $2.to_i, $3
-          @current_rover = Rover.new(x, y, direction)
+          @state = "rover waiting for commands"
+
+          @current_rover = Rover.new(@plateau, x, y, direction)
         else
-          # TODO error reporting
+          raise BadInputError, "bad formatting on line #{@line}.  Required: X Y D (location and direction [NSEW] of rover)"
         end
+      when /waiting for commands/
+
     end
   end
 
