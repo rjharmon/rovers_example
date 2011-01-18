@@ -1,5 +1,6 @@
 class Rover
   class BadDirection < Exception ; end
+  class Lost < Exception ; end
 
   attr_accessor :position
   attr_accessor :heading
@@ -31,17 +32,27 @@ class Rover
     @heading = heading
   end
 
+
   def move
-    @position[0] += OFFSETS[heading].first
-    @position[1] += OFFSETS[heading].last
+    direction = OFFSETS[heading]
+    new_x = guard_move(@position.first, direction.first, @plateau.width)
+    new_y = guard_move(@position.last, direction.last, @plateau.height)
+
+    @position = [ new_x, new_y ]
   end
+
+  def guard_move(current_pos, offset, limit)
+    new_pos = current_pos + offset
+
+    raise Lost if new_pos < 0 or new_pos >= limit
+    new_pos
+  end
+  protected :guard_move
+
 
   def turn(direction)
     self.heading = new_heading(direction)
   end
-
-
-
 
   def new_heading(direction)
     current_index = HEADINGS.index(self.heading)

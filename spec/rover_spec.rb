@@ -22,6 +22,12 @@ describe Rover do
   end
 
   describe "move" do
+
+    def go(heading)
+      @r.heading = heading
+      @r.move
+    end
+    
     it "goes to the right location" do
       @r.move
       @r.position.should == [6, 5]
@@ -31,10 +37,6 @@ describe Rover do
       @r.heading.should == E
     end
     describe "on different heading" do
-      def go(heading)
-        @r.heading = heading
-        @r.move
-      end
       it "should go north" do
         go(N)
         @r.position.should == [5,6]
@@ -52,6 +54,37 @@ describe Rover do
         @r.position.should == [4,5]
       end
     end
+
+    describe "off the plateau" do
+      def fails(pos_x, pos_y, direction)
+        @r.position = [pos_x, pos_y]
+        lambda { go(direction) }.should raise_error(Rover::Lost)
+      end
+      it "to the north" do
+        fails(1,9, N)
+      end
+      it "to the south" do
+        fails(1,0, S)
+      end
+      it "to the east" do
+        fails(9,1, E)
+      end
+      it "to the west" do
+        fails(0,1, W)
+      end
+    end
+
+    describe "near the edge" do
+      it "doesn't have off-by-one errors" do
+        @r.position = [1,8]
+        go(E)
+        go(N)
+        @r.position = [8,1]
+        go(S)
+        go(W)
+      end
+    end
+
   end
 
   describe "turn" do
