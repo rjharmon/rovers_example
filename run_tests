@@ -1,1 +1,2 @@
-rspec --require spec/spec_helper spec $*
+rspec --color --require spec/spec_helper spec $*
+cucumber features
