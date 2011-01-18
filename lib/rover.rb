@@ -44,11 +44,15 @@ class Rover
   def guard_move(current_pos, offset, limit)
     new_pos = current_pos + offset
 
-    raise Lost if new_pos < 0 or new_pos >= limit
+    raise lost_exception if new_pos < 0 or new_pos >= limit
     new_pos
   end
   protected :guard_move
 
+  def lost_exception
+    Lost.new("at "+ self.to_s)
+  end
+  protected :lost_exception
 
   def turn(direction)
     self.heading = new_heading(direction)

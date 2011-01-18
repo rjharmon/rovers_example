@@ -8,7 +8,7 @@ describe Rover do
   L = "L"
   R = "R"
   before do
-    @plateau = Plateau.new(10,10)
+    @plateau = Plateau.new(9,9)
     @r = Rover.new(@plateau, 5,5,E)
   end
   describe "initialization" do
@@ -59,6 +59,7 @@ describe Rover do
       def fails(pos_x, pos_y, direction)
         @r.position = [pos_x, pos_y]
         lambda { go(direction) }.should raise_error(Rover::Lost)
+        lambda { go(direction) }.should raise_error(/at #{@r.to_s}/)
       end
       it "to the north" do
         fails(1,9, N)

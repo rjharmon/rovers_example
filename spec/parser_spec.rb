@@ -93,6 +93,11 @@ describe "parsing input" do
       @p.read("3 2 E")
       @p.state.should =~ /rover/
     end
+    it "reports the location of the problem if the rover is lost" do
+      @rover.should_receive(:move).and_return(true)
+      @rover.should_receive(:move).and_raise(@rover.send(:lost_exception))
+      lambda{ @p.read("MM") }.should raise_error(/Rover lost at #{@rover.to_s} at line 3, character 2/)
+    end
   end
 
 end

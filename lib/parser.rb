@@ -24,10 +24,17 @@ class Parser
           raise BadInputError, "bad formatting on line #{@line}.  Required: X Y D (location and direction [NSEW] of rover)"
         end
       when /waiting for commands/
+        pos = 0
         input.each_char do |command|
+          pos += 1
+          location = "at line #{@line}, character #{pos}"
           case command
             when 'M'
-              @current_rover.move
+              begin
+                @current_rover.move
+              rescue Rover::Lost => e
+                raise( Rover::Lost, "Rover lost #{e.message} #{location}" )
+              end
             when 'L', 'R'
               direction = command
               @current_rover.turn(direction)
